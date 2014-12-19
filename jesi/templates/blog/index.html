@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+          {% for post in info.posts.object_list %}
+          <h1><a href="/blog/{{ post.id }}/">{{ post.title }}</a></h1>
+          
+          <p class="text">
+            {% autoescape off %}{{ post.content|linebreaksbr|safe }}{% endautoescape %}
+          </p>
+          
+          <p class="left">
+            <input type="button" class="secondary" value="Read More" onclick="window.location.href='/blog/{{ post.id }}';" />
+          </p>
+          
+          <p class="blog_meta">
+            <span class="timestamp">{{ post.created_date|date:"m.d.Y G:i" }}</span>
+            <span class="comments">{{ post.comment_list|length }} Comment{{ post.comment_list|length|pluralize }}</span>
+          </p>
+          {% endfor %}
+          
+          <p id="pages">
+            {% if info.posts.has_previous %}
+            <a id="prev" href="/blog/page/{{ info.posts.previous_page_number }}/">Previous Page</a>
+            {% endif %}
+            
+            {% if info.posts.has_next %}
+            <a id="next" href="/blog/page/{{ info.posts.next_page_number }}/">Next Page</a>
+            {% endif %}
+          </p>
+{% endblock content %}

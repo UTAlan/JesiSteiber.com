@@ -1,0 +1,91 @@
+import os
+
+# Django settings for jesi project.
+#DEBUG = False
+DEBUG=True
+SITE_ROOT = '/home/alon10/jessicasteiber.com/'
+SITE_URL = 'http://www.jesisteiber.com/'
+SITE_NAME = 'JesiSteiber.com'
+TEMPLATE_DEBUG = DEBUG
+ADMINS = (('Alan Beam', 'alan@alanbeam.net'))
+MANAGERS = ADMINS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'jsteiber',
+        'USER': 'alon10',
+        'PASSWORD': 'qwer1234',
+        'HOST': 'my.sql.alanbeam.net'
+    }
+}
+
+TIME_ZONE = 'America/Chicago'
+LANGUAGE_CODE = 'en-us'
+SITE_ID = 1
+USE_I18N = True
+USE_L10N = True
+
+MEDIA_ROOT = SITE_ROOT + 'public/media/'
+MEDIA_URL = SITE_URL + 'media/'
+ADMIN_MEDIA_PREFIX = SITE_URL + 'media/admin/'
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static/')
+STATIC_URL = '/static/'
+SECRET_KEY = 'ljl-1@)yhprn11gnh2!1bp+9+iqnp$11%z!62f2!o&pwogft(2'
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+)
+
+ROOT_URLCONF = 'jesi.urls'
+
+TEMPLATE_DIRS = (SITE_ROOT + 'jesi/templates')
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+#    'django.contrib.messages',
+    'django.contrib.admin',
+    'django.contrib.staticfiles',
+    'jesi.blog',
+    'jesi.photos',
+    'jesi.links',
+    'jesi.verses',
+    'jesi.contact',
+    'jesi.badges'
+)
+
+EMAIL_HOST = 'mail.designs.alanbeam.net'
+EMAIL_HOST_USER = 'alan@designs.alanbeam.net'
+EMAIL_HOST_PASSWORD = 'abd3$ign$'
+EMAIL_PORT = 25 
+DEFAULT_FROM_EMAIL = 'jesi@jesisteiber.com'
+SERVER_EMAIL = 'jesi@jesisteiber.com'
+
+GOOGLE_USER = 'jesi.steiber'
+GOOGLE_EMAIL = GOOGLE_USER + '@gmail.com'
+GOOGLE_PASS = 'boobear1'
+
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+
+RECAPTCHA_PRIVATE_KEY = '6LcE-9gSAAAAAIjD4-hY_hfTatH34ekWO8FO1Xd0'
+RECAPTCHA_PUBLIC_KEY = '6LcE-9gSAAAAACLay7g2WGkch9OitSXRBfwM7aEv'
+
+ALLOWED_HOSTS = ['www.jesisteiber.com', 'www.jessicasteiber.com']
+
+try:
+ from local_settings import *
+except ImportError:
+ pass

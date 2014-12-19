@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+          <h2 class="title">Photos</h2>
+          
+          {% for a in info.albums %}
+          <p class="album">
+            <a href="/photos/{{ a.id }}"><img src="{{ a.thumb }}" alt="" /></a><br />
+            <a href="/photos/{{ a.id }}">{{ a.title }}</a>
+          </p>
+          {% endfor %}
+          
+          <style type="text/css">
+            p.album {
+              width: 220px;
+              height: 175px;
+              float: left;
+              text-align: center;
+              font-weight: bold;
+            }
+            
+            p.album a {
+              text-decoration: none;
+            }
+            
+            p.album img {
+              border: solid 1px #000;
+            }
+          </style>
+{% endblock content %}

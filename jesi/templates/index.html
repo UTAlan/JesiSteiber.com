@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block header %}
+          <div id="scroller">
+            <div id="slider">
+              <ul id="sliderContent">
+                <li class="sliderImage">
+                  <img src="/media/images/scroller_ffa.png" width="950px" height="300px" />
+                  <span class="bottom"><strong><a href="/blog/37/">Forever, For Always...</a></strong><br />I wrote this last year as we prepared to celebrate our 14th anniversary.  It's something that still rings true.  If you want to know anything about us, this is a great place to start.</span>
+                </li>
+                <li class="sliderImage">
+                  <img src="/media/images/scroller_mpn.png" width="950px" height="300px" />
+                  <span class="bottom"><strong><a href="http://mypurposenow.co/?p=3567">My Purpose Now</a></strong><br />As a contributing author for My Purpose Now I am blessed to be a part of a team of women ministering to women in our second half of life.  Read my latest article and feel free to leave me a comment.</span>
+                </li>
+                <div class="clear sliderImage"></div>
+              </ul>
+            </div>
+          </div> <!-- </div id="scroller"> -->
+{% endblock header %}
+
+{% block content %}
+          {% for post in info.posts %}
+          <h1><a href="/blog/{{ post.id }}/">{{ post.title }}</a></h1>
+          
+          <p>
+            {% autoescape off %}{{ post.content|linebreaksbr|safe }}{% endautoescape %}
+          </p>
+          
+          <p class="left">
+            <input type="button" class="secondary" value="Read More" onclick="window.location.href='/blog/{{ post.id }}';" />
+          </p>
+          
+          <p class="blog_meta">
+            <span class="timestamp">{{ post.created_date|date:"m.d.Y G:i" }}</span>
+            <span class="comments">{{ post.comment_list|length }} Comment{{ post.comment_list|length|pluralize }}</span>
+          </p>
+          {% endfor %}
+{% endblock content %}
+
+{% block jquery %}$("#slider").s3Slider({ timeOut: 7000 });{% endblock jquery %}

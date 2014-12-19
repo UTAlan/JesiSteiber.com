@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+          <h1>Contact</h1>
+
+          {% if info.msg != '' %}
+          {% autoescape off %}{{ info.msg }}{% endautoescape %}
+          {% else %}
+          <form id="contact_form" action="/contact/" method="post">{% csrf_token %}
+          <p>
+            <label for="id_name">Name:</label> {{ info.form.name }}
+            <label for="id_email">Email:</label> {{ info.form.email }}
+            <label for="id_message">Message:</label> {{ info.form.message }}
+            <label>&nbsp;</label>
+          </p>
+          
+          <div id="id_recaptcha" style="float: left; margin-bottom: 10px;"></div>
+
+          <p style="clear:both;">
+            <label>&nbsp;</label>
+            <input type="button" class="primary" value="Send" onclick="#('contact_form').submit();" />
+          </p>
+          </form>
+          {% endif %}
+{% endblock content %}
+
+{% block jquery %}    
+    Recaptcha.create("6Lde1LsSAAAAACR6c-nwLfOOFbkddHKLftEJlyIH", "id_recaptcha", { theme: "white" } );
+{% endblock jquery %}

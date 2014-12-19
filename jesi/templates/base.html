@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>{% block pagetitle %}JesiSteiber.com{% endblock pagetitle %}</title>
+    
+    <!-- META -->
+    <meta name="description" content="" />
+    <meta name="keywords" content="{% block keywords %}{% endblock keywords %}" />
+    <meta name="author" content="Alan Beam" />
+    <meta charset="utf-8">
+    
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="JesiSteiber.com RSS Feed" href="http://feeds.feedburner.com/jesisteiber" />
+    <link href="/favicon.ico" rel="icon" type="image/x-icon" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/media/css/css.css" type="text/css" media="screen, projection" />
+    
+    <!-- JS -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="http://s3slider-original.googlecode.com/svn/trunk/s3Slider.js"></script>
+    <script type="text/javascript" src="/media/js/twitter.js"></script>
+    <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    
+    <script type="text/javascript"><!--
+    // Google Analytics
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-17251377-4']);
+    _gaq.push(['_trackPageview']);
+    
+    $(function() {
+      {% block jquery %}{% endblock jquery %}
+      
+      // Twitter
+/*    	$("#twitter").getTwitter({
+        userName: "jesisteiber",
+        numTweets: 4,
+        showHeading: false,
+        showProfileLink: false,
+        showTimestamp: true
+      });
+ */           
+      // Google Analytics
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    });
+    --></script>
+  </head>
+  <body>
+    <div id="headerWrapper">
+      <div id="header">
+        <div id="logo">
+          <a href="/"><img src="/media/images/logo.png" alt="JesiSteiber.com" /></a>
+        </div> <!-- </div id="logo"> -->
+        
+        <div id="nav">
+          <ul>
+            <li><a id="welcome" {% if info.active == "index" %}class="active" {% endif %}href="/"><span>Welcome</span></a></li>
+            <li><a id="about" {% if info.active == "about" %}class="active" {% endif %}href="/about/"><span>About Me</span></a></li>
+            <li><a id="blog" {% if info.active == "blog" %}class="active" {% endif %}href="/blog/"><span>Blog</span></a></li>
+            <li><a id="photos" {% if info.active == "photos" %}class="active" {% endif %}href="/photos/"><span>Photos</span></a></li>
+            <li><a id="contact" {% if info.active == "contact" %}class="active" {% endif %}href="/contact/"><span>Contact</span></a></li>
+          </ul>
+        </div> <!-- </div id="nav"> -->
+        
+        {% block header %}{% endblock header %}
+      </div> <!-- </div id="header"> -->
+      
+      <div class="borderTop"></div>
+    </div> <!-- </div id="headerWrapper"> -->
+    
+    <div id="contentWrapper">
+      <div class="borderFullBottom"></div>
+      
+      <div id="content">
+        <div class="borderBottom"></div>
+        
+        <div id="main">
+          {% block content %}{% endblock content %}
+        </div> <!-- </div id="main"> -->
+        
+        <div id="sidebar">
+          {% block sidebar %}
+          
+          <!-- Begin MailChimp Signup Form -->
+<link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+<div id="mc_embed_signup" style="margin:0; padding:0;">
+<form style="padding:0;" action="http://jesisteiber.us6.list-manage2.com/subscribe/post?u=2cc51821d6ee4281b15d70352&amp;id=5a4915c49e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+	<h5>Mailing List</h5>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required /><br />
+	<div class="clear"><input type="button" onclick="$('#mc-embedded-subscribe-form').submit();" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="primary"></div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+          <h5>Recent Tweets</h5>
+          
+          <div id="twitter"></div>
+          <br />
+          <input type="button" class="primary" onclick="window.location.href='http://www.twitter.com/jesisteiber'" value="See More" />
+          
+          <h5>Favorite Links</h5>
+          
+          <p>
+            {% for l in info.links %}
+            {% autoescape off %}{{ l.get_link }}{% endautoescape %}<br />
+            {% endfor %}
+          </p>
+          
+          <h5>Favorite Verses</h5>
+          
+          <p>
+            {{ info.verse.verse}}
+            <br />
+            -{{ info.verse.reference }}
+          </p>
+          {% endblock sidebar %}
+          
+          {% if info.badges %}
+          {% for b in info.badges %}
+          <div class="center">
+            <!-- {{ b.content|safe }} -->
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div> <!-- </div id="sidebar"> -->
+
+	<div class="clear"></div>
+      </div> <!-- </div id="content"> -->
+      
+      <div class="clear"></div>
+      
+      <div class="borderTop"></div>
+    </div> <!-- </div id="contentWrapper"> -->
+    
+    <div id="footerWrapper">
+      <div class="borderFullBottom"></div>
+      
+      <div id="footer">
+        <div class="borderBottom"></div>
+        
+        <div id="copyright">
+          <p>&copy; 2010 Jesi Steiber. All Rights Reserved. Site By <a href="http://www.alanbeam.net">Alan Beam Designs</a>.</p>
+        </div> <!-- </div id="copyright"> -->
+        
+        <div id="social">
+          <p>
+            <a href="http://www.facebook.com/jesisteiber"><img src="/media/images/icon_facebook.png" alt="Facebook" /></a>
+            <a href="http://twitter.com/jesisteiber"><img src="/media/images/icon_twitter.png" alt="Twitter" /></a>
+            <a href="https://plus.google.com/u/0/100977425274134060901/"><img src="/media/images/icon_googleplus.png" alt="Google Plus" /></a>
+            <a href="http://feeds.feedburner.com/jesisteiber"><img src="/media/images/icon_rss.png" alt="RSS" /></a>
+          </p>
+        </div>
+        
+        <div class="clear"></div>
+      </div> <!-- </div id="footer"> -->
+    </div> <!-- </div id="footerWrapper"> -->
+  </body>
+</html>

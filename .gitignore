@@ -1,0 +1,6 @@
+
+js_env/
+
+*.pyc
+
+jesi/jesi/local_settings.py

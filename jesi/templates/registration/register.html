@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+          <h2 class="title">Register</h2>
+          
+          {% if form.errors %}
+          <p class="error">There was an error processing your registration. Please try again.</p>
+          {% endif %}
+          
+          <form action="/accounts/register/" method="post">{% csrf_token %}
+          <p>
+					  {{ form.username.label_tag }}
+					  {{ form.username }}
+					
+					  {{ form.password1.label_tag }}
+					  {{ form.password1 }}
+            
+					  {{ form.password2.label_tag }}
+					  {{ form.password2 }}
+            
+					  <input type="submit" value="Register" />
+					</p>
+          </form>
+{% endblock content %}
+

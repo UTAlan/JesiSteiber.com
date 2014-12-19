@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+          <h2 class="title"><a href="/photos/">Photos</a></h2>
+          
+          <h3>{{ info.album.title }}</h3>
+          
+          {% for p in info.photos %}
+          <p class="photo"><a href="{{ p.img }}" title="{% if p.caption %}{{ p.caption }}{% endif %}"><img src="{{ p.thumb }}" /></a></p>
+          {% endfor %}
+          
+          <style type="text/css">
+            p.photo {
+              width: 165px;
+              height: 150px;
+              float: left;
+              text-align: center;
+            }
+            
+            p.photo img {
+              border: solid 1px #000;
+            }
+          </style>
+{% endblock content %}
+
+{% block jquery %}
+$("p.photo a").lightBox({
+  maxHeight: 540,
+  maxWidth: 720
+});
+{% endblock jquery %}

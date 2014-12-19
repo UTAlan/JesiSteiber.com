@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% load gravatar %}
+
+{% block keywords %}{{ info.post.title }},{% endblock keywords %}
+
+{% block content %}          
+          <h1><a href="/blog/{{ info.post.id }}/">{{ info.post.title }}</a></h1>
+          
+          <p class="blog_meta" style="float:left;">
+            <span class="timestamp">{{ info.post.created_date|date:"m.d.Y G:i" }}</span>
+            <span class="comments">{{ info.post.comment_list|length }} Comment{{ info.post.comment_list|length|pluralize }}</span>
+          </p>
+          
+          <p class="blog_meta">
+            <span class='st_facebook' displayText=''></span>
+            <span class='st_twitter' displayText=''></span>
+            <span class='st_googleplus' displayText=''></span>
+            <span class='st_email' displayText=''></span>
+          </p>
+          
+          <p class="text">{% autoescape off %}{{ info.post.content|linebreaksbr|safe }}{% endautoescape %}</p>
+          
+          <p class="divider"></p>
+          
+          {% for comment in info.comment_list %}
+          <div class="comment">
+            <p class="commentAvatar">
+              <a name="comment{{ comment.id }}"></a>
+              
+              <img alt="Gravatar" src="http://www.gravatar.com/avatar/{{ comment.author_email|gravatar }}?d=identicon" />
+            </p>
+            
+            <p class="commentText">
+              <span class="commentAuthor">{{ comment.author_name }}</span>
+              <span class="commentContent">{{ comment.content|linebreaks }}</span>
+            </p>
+          </div>
+          {% empty %}
+          <p>No comments yet!</p>
+          {% endfor %}
+          
+          <p class="divider"></p>
+          
+          <div id="comment_div">
+            <form id="comment_form" action="/blog/{{ info.post.id }}/comment/" method="post">{% csrf_token %}
+            <p>
+              <label for="id_author_name">Name:</label> {{ info.form.author_name }}
+              <label for="id_author_email">Email:</label> {{ info.form.author_email }}
+              
+              <label for="id_content">Comment:</label> 
+              {{ info.form.content }}
+              
+              <label>&nbsp;</label>
+            </p>
+            
+            <div id="id_recaptcha" style="float: left; margin-bottom: 10px;"></div>
+            
+            <p>
+              <label>&nbsp;</label>
+              <input type="button" class="primary" value="Post" onclick="$('#comment_form').submit();" />
+              <input type="hidden" name="post_id" value="{{ info.post.id }}" />
+            </p>
+            </form>
+				  </div> <!-- </div id="comment_div"> -->
+          
+          <br class="clear" />
+{% endblock %}
+
+{% block jquery %}
+    Recaptcha.create("6LcE-9gSAAAAACLay7g2WGkch9OitSXRBfwM7aEv", "id_recaptcha", { theme: "white" } );
+    
+    var switchTo5x=true;
+    stLight.options({ publisher: "2d014aad-eb5d-4531-a4b8-35edf0e037e9", onhover: false });
+{% endblock jquery %}
